@@ -1,0 +1,27 @@
+{
+  "$schema": "./schemas/registry.schema.json",
+  "version": 1,
+  "updated": "2026-05-08",
+  "extensions": [],
+  "examples": [
+    {
+      "name": "weather-widget",
+      "description": "Sidebar widget showing the current local forecast.",
+      "repository": "https://github.com/example/otion-weather-widget",
+      "homepage": "https://example.com/otion-weather-widget",
+      "categories": ["widgets"],
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "min_host_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "commit_sha": "0000000000000000000000000000000000000000",
+          "approved_at": "2026-05-08",
+          "reviewer": "example-reviewer"
+        }
+      ]
+    }
+  ]
+}

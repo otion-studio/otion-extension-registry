@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://otion.dev/schemas/otion.schema.json",
+  "title": "Otion Extension Manifest",
+  "description": "Schema for otion.json, the manifest at the root of every Otion extension repository. Mirrors RULES.md §2.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "description",
+    "author",
+    "license",
+    "repository",
+    "entry",
+    "build",
+    "permissions",
+    "dependencies",
+    "min_host_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "description": "Globally unique within the marketplace. Lowercase, hyphen-separated."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Strict semver: MAJOR.MINOR.PATCH."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "One-line summary, plain text."
+    },
+    "author": {
+      "type": "object",
+      "required": ["name", "contact"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "contact": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Email or URL where the author can be reached."
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX identifier matching the LICENSE file."
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://github\\.com/",
+      "description": "Full GitHub URL."
+    },
+    "entry": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative path to the entry point (after build, if any)."
+    },
+    "build": {
+      "type": ["string", "null"],
+      "description": "Build command Otion will run, or null if no build is needed (RULES.md §7.2)."
+    },
+    "permissions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          { "pattern": "^network:[^/\\s]+$" },
+          { "pattern": "^filesystem:read:.+$" },
+          { "pattern": "^filesystem:write:.+$" },
+          { "const": "clipboard:read" },
+          { "const": "clipboard:write" },
+          { "const": "notifications" },
+          { "const": "child_process" }
+        ]
+      },
+      "description": "Every capability the extension uses, narrowest scope possible (RULES.md §5)."
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+      },
+      "description": "Runtime dependencies. Versions must be exact — no ranges (RULES.md §4.2)."
+    },
+    "min_host_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Minimum version of Otion required."
+    },
+    "extra": {
+      "type": "object",
+      "description": "Namespaced container for non-standard fields. Unknown top-level keys cause rejection (RULES.md §2)."
+    }
+  }
+}
