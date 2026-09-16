@@ -1,5 +1,7 @@
 # Otion Extension Registry
 
+> Current host support: declarative blocks and portable agent guides, with no runtime permissions or builds. See [HOST_API.md](HOST_API.md). Rules about executable builds below describe a future host capability, not something the current installer runs.
+
 This repository is the source of truth for which extensions are approved for the Otion Marketplace.
 
 When you install an extension in Otion, the app checks this registry to confirm the extension has been reviewed and approved. Anything not listed here will not install through the marketplace.

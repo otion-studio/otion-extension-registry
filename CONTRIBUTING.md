@@ -1,5 +1,7 @@
 # Contributing to the Otion Extension Registry
 
+> Current host support: declarative blocks and portable agent guides, with no runtime permissions or builds. See [HOST_API.md](HOST_API.md). Rules about executable builds below describe a future host capability, not something the current installer runs.
+
 This repository decides which extensions are listed in the Otion Marketplace. Adding or updating a listing happens by pull request against [`registry.json`](registry.json).
 
 Before you start, read [`RULES.md`](RULES.md) end to end. The checklist at the bottom is the fastest pre-flight.
@@ -50,7 +52,7 @@ If a published version is found to be unsafe, open a PR that removes it from `ve
 
 ## Validation
 
-`registry.json` validates against [`schemas/registry.schema.json`](schemas/registry.schema.json). Your `otion.json` validates against [`schemas/otion.schema.json`](schemas/otion.schema.json). Run any standard JSON Schema validator locally before opening a PR — CI rejects malformed entries.
+`registry.json` validates against [`schemas/registry.schema.json`](schemas/registry.schema.json). Your `otion.json` validates against [`schemas/otion.schema.json`](schemas/otion.schema.json). Run any standard JSON Schema validator locally before opening a PR — the checked-in validation workflow rejects malformed registry entries.
 
 ## Reviewer notes
 

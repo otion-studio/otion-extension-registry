@@ -1,0 +1,42 @@
+{
+  "name": "otion-note-cards",
+  "version": "0.1.0",
+  "description": "Editable decision and project brief cards with portable external-agent guidance.",
+  "author": {
+    "name": "Otion",
+    "contact": "https://github.com/otion-studio"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/otion-studio/otion-extension-registry",
+  "entry": "otion.json",
+  "build": null,
+  "permissions": [],
+  "dependencies": {},
+  "min_host_version": "0.1.0",
+  "blocks": [
+    {
+      "type": "decisionCard",
+      "title": "Decision card",
+      "description": "Record a decision and its rationale.",
+      "fields": {
+        "decision": "",
+        "context": "",
+        "rationale": "",
+        "owner": ""
+      }
+    },
+    {
+      "type": "projectBrief",
+      "title": "Project brief",
+      "description": "Capture the outcome, scope and next action.",
+      "fields": {
+        "outcome": "",
+        "scope": "",
+        "nextAction": ""
+      }
+    }
+  ],
+  "guides": {
+    "note-cards.md": "# Note cards\n\nUse decisionCard or projectBrief Otion markers with string fields. Preserve unknown fields and blocks. Run the workspace validator and review the diff after edits. These blocks require no runtime permissions and contain no executable code.\n"
+  }
+}

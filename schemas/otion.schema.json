@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://otion.dev/schemas/otion.schema.json",
   "title": "Otion Extension Manifest",
-  "description": "Schema for otion.json, the manifest at the root of every Otion extension repository. Mirrors RULES.md §2.",
+  "description": "Schema for otion.json, the manifest at the root of every Otion extension repository. Mirrors RULES.md \u00a72.",
   "type": "object",
   "required": [
     "name",
@@ -37,10 +37,16 @@
     },
     "author": {
       "type": "object",
-      "required": ["name", "contact"],
+      "required": [
+        "name",
+        "contact"
+      ],
       "additionalProperties": false,
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
         "contact": {
           "type": "string",
           "minLength": 1,
@@ -64,8 +70,11 @@
       "description": "Relative path to the entry point (after build, if any)."
     },
     "build": {
-      "type": ["string", "null"],
-      "description": "Build command Otion will run, or null if no build is needed (RULES.md §7.2)."
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Build command Otion will run, or null if no build is needed (RULES.md \u00a77.2)."
     },
     "permissions": {
       "type": "array",
@@ -73,16 +82,30 @@
       "items": {
         "type": "string",
         "anyOf": [
-          { "pattern": "^network:[^/\\s]+$" },
-          { "pattern": "^filesystem:read:.+$" },
-          { "pattern": "^filesystem:write:.+$" },
-          { "const": "clipboard:read" },
-          { "const": "clipboard:write" },
-          { "const": "notifications" },
-          { "const": "child_process" }
+          {
+            "pattern": "^network:[^/\\s]+$"
+          },
+          {
+            "pattern": "^filesystem:read:.+$"
+          },
+          {
+            "pattern": "^filesystem:write:.+$"
+          },
+          {
+            "const": "clipboard:read"
+          },
+          {
+            "const": "clipboard:write"
+          },
+          {
+            "const": "notifications"
+          },
+          {
+            "const": "child_process"
+          }
         ]
       },
-      "description": "Every capability the extension uses, narrowest scope possible (RULES.md §5)."
+      "description": "Every capability the extension uses, narrowest scope possible (RULES.md \u00a75)."
     },
     "dependencies": {
       "type": "object",
@@ -90,7 +113,7 @@
         "type": "string",
         "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
       },
-      "description": "Runtime dependencies. Versions must be exact — no ranges (RULES.md §4.2)."
+      "description": "Runtime dependencies. Versions must be exact \u2014 no ranges (RULES.md \u00a74.2)."
     },
     "min_host_version": {
       "type": "string",
@@ -99,7 +122,49 @@
     },
     "extra": {
       "type": "object",
-      "description": "Namespaced container for non-standard fields. Unknown top-level keys cause rejection (RULES.md §2)."
+      "description": "Namespaced container for non-standard fields. Unknown top-level keys cause rejection (RULES.md \u00a72)."
+    },
+    "blocks": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "title",
+          "description",
+          "fields"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object",
+            "maxProperties": 20,
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "guides": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9-]+\\.md$"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   }
 }

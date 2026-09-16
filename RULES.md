@@ -1,5 +1,7 @@
 # Otion Marketplace — Publishing Rules
 
+> Current host support: declarative blocks and portable agent guides, with no runtime permissions or builds. See [HOST_API.md](HOST_API.md). Rules about executable builds below describe a future host capability, not something the current installer runs.
+
 These rules apply to every package submitted to the Otion Marketplace. They exist for one reason: **to make your package cheap and reliable to review.**
 
 If your code is clean, declarative, and minimal in what it asks for, it will pass review quickly. If it's obfuscated, opaque, or asks for more than it needs, it will be rejected — even if it's not malicious. We don't have the resources to audit code that fights back.
