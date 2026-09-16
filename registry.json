@@ -1,15 +1,39 @@
 {
   "$schema": "./schemas/registry.schema.json",
   "version": 1,
-  "updated": "2026-05-08",
-  "extensions": [],
+  "updated": "2026-09-16",
+  "extensions": [
+    {
+      "name": "otion-note-cards",
+      "description": "Editable decision and project brief cards with portable external-agent guidance.",
+      "repository": "https://github.com/otion-studio/otion-extension-registry",
+      "categories": [
+        "blocks",
+        "external-agents"
+      ],
+      "license": "MIT",
+      "latest_version": "0.1.0",
+      "min_host_version": "0.2.0",
+      "versions": [
+        {
+          "version": "0.1.0",
+          "tag": "v0.1.0",
+          "commit_sha": "b48f15b4cab36223c194dd6dc174b72c750ea7ef",
+          "approved_at": "2026-09-16",
+          "reviewer": "codex (automated source and schema review)"
+        }
+      ]
+    }
+  ],
   "examples": [
     {
       "name": "weather-widget",
       "description": "Sidebar widget showing the current local forecast.",
       "repository": "https://github.com/example/otion-weather-widget",
       "homepage": "https://example.com/otion-weather-widget",
-      "categories": ["widgets"],
+      "categories": [
+        "widgets"
+      ],
       "license": "MIT",
       "latest_version": "1.0.0",
       "min_host_version": "1.0.0",
