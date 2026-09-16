@@ -30,11 +30,11 @@ The registry is a plain text file in version control on purpose. Every change is
 Otion fetches `registry.json` from `main` over HTTPS. For each extension a user installs, the client:
 
 1. Looks up the entry by `name` in `extensions[]`.
-2. Picks a `version` from `versions[]`.
-3. Clones the source repository at the matching `commit_sha` — never at the tag, since tags are mutable and SHAs aren't.
-4. Verifies the SHA, then builds and installs locally per [`RULES.md`](RULES.md) §7.
+2. Selects `latest_version` and its approval from `versions[]`.
+3. Downloads `otion.json` from the exact `commit_sha` URL, never a mutable branch or tag.
+4. Validates identity, host compatibility, declarative fields and zero runtime permissions, then saves the package and agent guides. No source build or downloaded code execution occurs.
 
-If the extension isn't here, or the SHA doesn't match what was approved, the install fails closed.
+If the extension is no longer approved, the pinned download fails, or its manifest does not match the approved name/version and supported format, installation fails. The existing installed package remains active.
 
 `registry.json` also contains an `examples[]` array. Clients ignore it — it's documentation so readers can see the shape of a complete entry. Do not put real listings there.
 

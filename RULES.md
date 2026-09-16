@@ -1,6 +1,6 @@
 # Otion Marketplace — Publishing Rules
 
-> Current host support: declarative blocks and portable agent guides, with no runtime permissions or builds. See [HOST_API.md](HOST_API.md). Rules about executable builds below describe a future host capability, not something the current installer runs.
+> Current publication contract: [HOST_API.md](HOST_API.md) is authoritative for declarative blocks and portable agent guides in Otion 0.2. Packages require no runtime permissions or builds; signed tags are recommended, and approval/install always pin a full source commit. The executable-plugin requirements below (builds, permission prompts and mandatory signed tags) are a future proposal. They do not describe the current installer. The bundled first-party example is covered by this repository’s MIT notice.
 
 These rules apply to every package submitted to the Otion Marketplace. They exist for one reason: **to make your package cheap and reliable to review.**
 
