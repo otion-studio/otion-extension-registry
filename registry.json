@@ -5,14 +5,15 @@
   "extensions": [
     {
       "name": "otion-note-cards",
-      "description": "Editable decision and project brief cards with portable external-agent guidance.",
+      "description": "Decision cards, page statistics, a focus widget and portable external-agent guidance.",
       "repository": "https://github.com/otion-studio/otion-extension-registry",
       "categories": [
         "blocks",
+        "widgets",
         "external-agents"
       ],
       "license": "MIT",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "min_host_version": "0.2.0",
       "versions": [
         {
@@ -21,6 +22,13 @@
           "commit_sha": "b48f15b4cab36223c194dd6dc174b72c750ea7ef",
           "approved_at": "2026-09-16",
           "reviewer": "codex (automated source and schema review)"
+        },
+        {
+          "version": "0.2.0",
+          "tag": "v0.2.0",
+          "commit_sha": "85cf8552808c4bed5aa7f4c75bb366da66e1798b",
+          "approved_at": "2026-09-16",
+          "reviewer": "codex (automated source, worker isolation and SDK verification)"
         }
       ]
     }
