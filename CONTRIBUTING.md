@@ -1,66 +1,13 @@
-# Contributing to the Otion Extension Registry
+# Contributing extensions
 
-> Current publication contract: [HOST_API.md](HOST_API.md) is authoritative for declarative blocks and portable agent guides in Otion 0.2. Packages require no runtime permissions or builds; signed tags are recommended, and approval/install always pin a full source commit. The executable-plugin requirements below (builds, permission prompts and mandatory signed tags) are a future proposal. They do not describe the current installer. The bundled first-party example is covered by this repository’s MIT notice.
+Read [HOST_API.md](HOST_API.md) and [RULES.md](RULES.md), then start from the SDK scaffold or the included package. Declarative and isolated executable packages are supported by the same registry.
 
-This repository decides which extensions are listed in the Otion Marketplace. Adding or updating a listing happens by pull request against [`registry.json`](registry.json).
+1. Publish readable, licensed source with a README, changelog and security contact. Explain every permission and lifecycle behavior.
+2. Run the offline SDK preparation helper, test a local package preview in Otion, and verify the manifest's source digest. Execute the extension's tests and registry validation.
+3. Commit the tested source and create a `v<semver>` tag. Signed tags are recommended. Record the exact full source SHA; never use a branch name as the approval revision.
+4. Open a pull request adding the package to `extensions` in `registry.json`. Include the repository URL, name, description, categories, license, latest version, minimum host version and version/tag/commit metadata. Do not invent a human review approval. The reviewer records the actual review identity and date after examining source and test evidence.
+5. For updates, append a version record, update `latest_version`, document changes and any added capabilities, and review the diff from the previous approved source. Users review the exact executable revision and capabilities before installation.
 
-Before you start, read [`RULES.md`](RULES.md) end to end. The checklist at the bottom is the fastest pre-flight.
+Run `python3 -m pip install -r requirements.txt`, `python3 scripts/validate.py`, and `node --test sdk/sdk.test.mjs`. Source digests must match, contribution IDs must be unique, and placeholder SHAs are rejected.
 
-## Submitting a new extension
-
-1. Build your extension in its own public GitHub repository. The repo must satisfy [`RULES.md`](RULES.md) §1 (LICENSE, README, CHANGELOG, SECURITY, `otion.json`, `otion-marketplace` topic).
-2. Tag a release. The tag must be `v<semver>` and must be signed (RULES.md §7.1).
-3. Open a pull request here that appends an entry to `extensions[]` in `registry.json`.
-
-A registry entry looks like this:
-
-```json
-{
-  "name": "weather-widget",
-  "description": "Sidebar widget showing the current local forecast.",
-  "repository": "https://github.com/your-name/otion-weather-widget",
-  "homepage": "https://your-name.dev/weather-widget",
-  "categories": ["widgets"],
-  "license": "MIT",
-  "latest_version": "1.0.0",
-  "min_host_version": "1.0.0",
-  "versions": [
-    {
-      "version": "1.0.0",
-      "tag": "v1.0.0",
-      "commit_sha": "0000000000000000000000000000000000000000",
-      "approved_at": "0000-00-00",
-      "reviewer": ""
-    }
-  ]
-}
-```
-
-Leave `commit_sha`, `approved_at`, and `reviewer` blank or stubbed in your PR. The reviewer fills those in during merge — do not invent values.
-
-## Submitting a new version of an existing extension
-
-1. Tag the new release in your repository.
-2. Open a PR that appends a new object to that extension's `versions[]` array and updates `latest_version`.
-3. Update `CHANGELOG.md` in your own repository for the new version. Reviewers compare diffs against the changelog (RULES.md §7.3).
-
-If the new version adds permissions, it must be a major version bump (RULES.md §5.2). Users will be re-prompted to consent.
-
-## Yanking a version
-
-If a published version is found to be unsafe, open a PR that removes it from `versions[]` with an explanation in the PR description. Otion clients refuse to install versions that are no longer in the registry, so yanking is the rollback mechanism.
-
-## Validation
-
-`registry.json` validates against [`schemas/registry.schema.json`](schemas/registry.schema.json). Your `otion.json` validates against [`schemas/otion.schema.json`](schemas/otion.schema.json). Run any standard JSON Schema validator locally before opening a PR — the checked-in validation workflow rejects malformed registry entries.
-
-## Reviewer notes
-
-When reviewing a PR:
-
-- Clone the extension at the declared tag.
-- Verify the tag's signature.
-- Resolve the tag to its commit SHA and put that SHA in the entry — never trust the tag alone, since tags can be force-pushed.
-- Walk through the [`RULES.md`](RULES.md) checklist; a single rule violation is a rejection.
-- Set `approved_at` to today's date and `reviewer` to your GitHub handle.
-- Merge with a commit message that names the extension and the version (e.g. `weather-widget 1.0.0`).
+If a release is unsafe, remove it from the registry with an explanation. New installations recheck live approval and refuse removed releases. Existing installations do not silently delete themselves: publish a clear advisory so users can disable/uninstall and inspect their data. Disabling or uninstalling preserves page content and customized external-agent guides.

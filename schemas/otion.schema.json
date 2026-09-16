@@ -70,39 +70,18 @@
       "description": "Relative path to the entry point (after build, if any)."
     },
     "build": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Build command Otion will run, or null if no build is needed (RULES.md \u00a77.2)."
+      "type": "null",
+      "description": "The host never executes install-time builds. Prepare reviewed JavaScript source before publishing."
     },
     "permissions": {
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "type": "string",
-        "anyOf": [
-          {
-            "pattern": "^network:[^/\\s]+$"
-          },
-          {
-            "pattern": "^filesystem:read:.+$"
-          },
-          {
-            "pattern": "^filesystem:write:.+$"
-          },
-          {
-            "const": "clipboard:read"
-          },
-          {
-            "const": "clipboard:write"
-          },
-          {
-            "const": "notifications"
-          },
-          {
-            "const": "child_process"
-          }
+        "enum": [
+          "document:read",
+          "document:write",
+          "storage",
+          "clipboard:write"
         ]
       },
       "description": "Every capability the extension uses, narrowest scope possible (RULES.md \u00a75)."
@@ -164,6 +143,73 @@
       },
       "additionalProperties": {
         "type": "string"
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "api_version",
+        "sha256"
+      ],
+      "properties": {
+        "api_version": {
+          "const": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "widgets": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string"
+          }
+        }
       }
     }
   }

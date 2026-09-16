@@ -1,16 +1,19 @@
 {
   "name": "otion-note-cards",
-  "version": "0.1.0",
-  "description": "Editable decision and project brief cards with portable external-agent guidance.",
+  "version": "0.2.0",
+  "description": "Decision cards, page statistics, a focus widget and portable external-agent guidance.",
   "author": {
     "name": "Otion",
     "contact": "https://github.com/otion-studio"
   },
   "license": "MIT",
   "repository": "https://github.com/otion-studio/otion-extension-registry",
-  "entry": "otion.json",
+  "entry": "extension.js",
   "build": null,
-  "permissions": [],
+  "permissions": [
+    "document:read",
+    "storage"
+  ],
   "dependencies": {},
   "min_host_version": "0.2.0",
   "blocks": [
@@ -22,7 +25,9 @@
         "decision": "",
         "context": "",
         "rationale": "",
-        "owner": ""
+        "owner": "",
+        "status": "draft",
+        "title": ""
       }
     },
     {
@@ -32,11 +37,32 @@
       "fields": {
         "outcome": "",
         "scope": "",
-        "nextAction": ""
+        "nextAction": "",
+        "title": "",
+        "goal": "",
+        "owner": ""
       }
     }
   ],
   "guides": {
-    "note-cards.md": "# Note cards\n\nUse decisionCard or projectBrief Otion markers with string fields. Preserve unknown fields and blocks. Run the workspace validator and review the diff after edits. These blocks require no runtime permissions and contain no executable code.\n"
+    "note-cards.md": "# Note cards\n\nUse decisionCard or projectBrief Otion markers with string fields. Preserve unknown fields and blocks. Run the workspace validator and review the diff after edits. The optional executable views use the same portable data. The package reads the active page for statistics and stores its focus counter locally; it cannot access arbitrary files or the network.\n"
+  },
+  "commands": [
+    {
+      "id": "page-statistics",
+      "title": "Page statistics",
+      "description": "Count words, reading time and Markdown tasks in the active page."
+    }
+  ],
+  "widgets": [
+    {
+      "id": "focus-counter",
+      "title": "Focus sessions",
+      "description": "Track completed focus sessions on this device."
+    }
+  ],
+  "runtime": {
+    "api_version": 1,
+    "sha256": "f3d6c87f0f6d488cf4211529e9a251ce84b72a239ade7c9bd11d790b9a04a191"
   }
 }
